@@ -11,13 +11,17 @@ stages:
     - stage: Build
       displayName: Build App
       jobs:
-        - job: UseNet
+        - job: Build
           steps:
             - task: UseDotNet@2
               displayName: 'Use .NET SDK 6.x'
               inputs:
                   packageType: sdk
                   version: '6.x'
+            - task: Npm@1
+              displayName: 'Run npm install'
+              inputs:
+                verbose: false
     - stage: Stage2
       displayName: Test stage
       jobs:
