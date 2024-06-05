@@ -6,3 +6,17 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+
+stages:
+    - stage: Build
+      displayName: Build App
+      jobs:
+          - job: UseNet
+            steps:
+            - task: UseDotNet@2
+              displayName: 'Use .NET SDK 6.x'
+              inputs:
+                  packageType: sdk
+                  version: '6.x'
+    
+
