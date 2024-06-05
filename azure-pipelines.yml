@@ -11,12 +11,19 @@ stages:
     - stage: Build
       displayName: Build App
       jobs:
-          - job: UseNet
-            steps:
+        - job: UseNet
+          steps:
             - task: UseDotNet@2
               displayName: 'Use .NET SDK 6.x'
               inputs:
                   packageType: sdk
                   version: '6.x'
+    - stage: Stage2
+      displayName: Test stage
+      jobs:
+        - job: TestJob
+          steps:
+            - bash: echo "Test Job - Bash Step"      
+                
     
 
