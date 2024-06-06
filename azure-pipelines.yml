@@ -43,17 +43,35 @@ stages:
                 projects: '**/*.csproj'
             
             - task: DotNetCoreCLI@2
+              displayName: 'Build Project - Release'
               inputs:
                 command: 'build'
                 projects: '**/*.csproj'
                 arguments: '--no-restore --configuration Release'            
               
-    - stage: Stage2
+    - stage: PublishProjectRelease
+      displayName: Publish Project - Release
+      jobs:
+        - job: Publish
+          steps:
+            - task: DotNetCoreCLI@2
+              displayName: 'Publish Project - Release'
+              inputs:
+                command: 'publish'
+                projects: '**/*.csproj'
+                publishWebProjects: false
+                arguments: '--no-build --configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
+                zipAfterPublish: true
+            
+            - task: PublishBuildArtifacts@1
+              condition: succeeded()
+              inputs:
+                PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+                ArtifactName: 'drop'
+
+    - stage: Test
       displayName: Test stage
       jobs:
         - job: TestJob
           steps:
             - bash: echo "Test Job - Bash Step"      
-                
-    
-
