@@ -47,13 +47,7 @@ stages:
               inputs:
                 command: 'build'
                 projects: '**/*.csproj'
-                arguments: '--no-restore --configuration Release'            
-              
-    - stage: PublishProjectRelease
-      displayName: Publish Project - Release
-      jobs:
-        - job: Publish
-          steps:
+                arguments: '--no-restore --configuration Release'     
             - task: DotNetCoreCLI@2
               displayName: 'Publish Project - Release'
               inputs:
@@ -67,8 +61,8 @@ stages:
               condition: succeeded()
               inputs:
                 PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-                ArtifactName: 'drop'
-
+                ArtifactName: 'drop'              
+ 
     - stage: Test
       displayName: Test stage
       jobs:
