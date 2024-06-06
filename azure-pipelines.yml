@@ -6,7 +6,6 @@ pool:
 
 
 variables:
-  buildConfiguration: 'Release'
   wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
   dotnetSdkVersion: '6.x'
 
@@ -45,11 +44,11 @@ stages:
                 command: 'restore'
                 projects: '**/*.csproj'
 
-            - template: templates/build.yml
+            - template: Templates/build.yml
               parameters:
                 buildConfiguration: 'Debug'
 
-            - template: templates/build.yml
+            - template: Templates/build.yml
               parameters:
                 buildConfiguration: 'Release'
             
