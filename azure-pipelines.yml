@@ -22,6 +22,32 @@ stages:
               displayName: 'Run npm install'
               inputs:
                 verbose: false
+            
+            - task: CmdLine@2
+              displayName: 'Compile Sass assets'
+              inputs:
+                script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
+            
+            - task: gulp@1
+              displayName: 'Run gulp tasks'
+            
+            #Shortcut for CmdLine@2
+            - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+              displayName: 'Write build info'
+              workingDirectory: Tailspin.SpaceGame.Web/wwwroot
+            
+            - task: DotNetCoreCLI@2
+              displayName: 'Restore project dependencies'
+              inputs:
+                command: 'restore'
+                projects: '**/*.csproj'
+            
+            - task: DotNetCoreCLI@2
+              inputs:
+                command: 'build'
+                projects: '**/*.csproj'
+                arguments: '--no-restore --configuration Release'            
+              
     - stage: Stage2
       displayName: Test stage
       jobs:
