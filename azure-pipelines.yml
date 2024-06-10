@@ -1,5 +1,11 @@
 trigger: 
-- '*'
+  branches:
+    include:
+    - '*'
+
+    paths:
+      exclude:
+        - excluded/* # exclude files under excluded/ to trigger the pipeline
 
 pool: 
   vmImage: ubuntu-latest
