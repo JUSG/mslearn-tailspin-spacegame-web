@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/JUSG-DevOps-Training/Space-Game-Web-Pipeline/_apis/build/status%2FJUSG.mslearn-tailspin-spacegame-web?branchName=main)](https://dev.azure.com/JUSG-DevOps-Training/Space-Game-Web-Pipeline/_build/latest?definitionId=3&branchName=main)
 
 # Contributing
 
